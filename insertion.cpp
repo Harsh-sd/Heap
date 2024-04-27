@@ -49,6 +49,39 @@ public:
             cout << arr[i];
             cout << endl;
         }
+    };
+    void deletefromheap()
+    {
+        if (size == 0)
+        {
+            cout << "nothing to delte";
+            return;
+        }
+        // put the last value to root position
+        arr[1] = arr[size];
+        // root is removed
+        size--;
+        // now put it to its right position
+        int i = 1;
+        while (i < size)
+        {
+            int leftindex = 2 * i;
+            int rightindex = 2 * i + 1;
+            if (leftindex <= size && arr[leftindex] > arr[i])
+            {
+                swap(arr[leftindex], arr[i]);
+                i = leftindex;
+            }
+            else if (rightindex < size && arr[rightindex] > arr[i])
+            {
+                swap(arr[rightindex], arr[i]);
+                i = rightindex;
+            }
+            else
+            {
+                return;
+            }
+        }
     }
 };
 int main()
@@ -62,6 +95,9 @@ int main()
     h.insert(59);
     h.insert(55);
     h.print();
+    h.deletefromheap();
+    h.print();
     return 0;
 }
 // result is: 65 61 59 60 57 52 55
+// result is:61 60 59 55 57 52
